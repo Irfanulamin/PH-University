@@ -26,6 +26,24 @@ const adminPaths2 = [
   },
 ];
 
+export const adminRoutes = adminPaths2.reduce((acc, item) => {
+  if (item.name && item.element) {
+    acc.push({
+      path: item.path,
+      element: item.element,
+    });
+  }
+  if (item.children) {
+    item.children.forEach((child) => {
+      acc.push({
+        path: child.path,
+        element: child.element,
+      });
+    });
+  }
+  return acc;
+}, []);
+
 const newArray = adminPaths2.reduce((acc, item) => {
   if (item.name && item.element) {
     acc.push({
@@ -47,3 +65,4 @@ const newArray = adminPaths2.reduce((acc, item) => {
 }, []);
 
 console.log(JSON.stringify(newArray));
+console.log(adminRoutes);
